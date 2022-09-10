@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZeitPlan.View_Model;
 
 namespace ZeitPlan.Views.Teacher
 {
@@ -36,18 +37,40 @@ namespace ZeitPlan.Views.Teacher
 
         async void LoadData()
         {
-            DataList.ItemsSource = (await App.firebaseDatabase.Child("TBL_STUDENT").OnceAsync<TBL_STUDENT>()).Select(x => new TBL_STUDENT
+            try
             {
-                STUDENT_ID = x.Object.STUDENT_ID,
-                STUDENT_NAME = x.Object.STUDENT_NAME,
-                STUDENT_EMAIL = x.Object.STUDENT_EMAIL,
-                STUDENT_PASSWORD = "*******",
-                CLASS_FID = x.Object.CLASS_FID,
 
 
+                var RawData = (await App.firebaseDatabase.Child("TBL_STUDENT").OnceAsync<TBL_STUDENT>()).ToList();
+                var RefinedList = new List<View_Student>();
+                foreach (var item in RawData)
+                {
+                    var Class = (await App.firebaseDatabase.Child("TBL_CLASS").OnceAsync<TBL_CLASS>()).FirstOrDefault(x => x.Object.CLASS_ID == item.Object.CLASS_FID);
 
 
-            }).ToList();
+                    RefinedList.Add(new View_Student
+                    {
+                        STUDENT_ID = item.Object.STUDENT_ID,
+                       STUDENT_NAME = item.Object.STUDENT_NAME,
+                        STUDENT_EMAIL = item.Object.STUDENT_EMAIL,
+                        STUDENT_PASSWORD = item.Object.STUDENT_PASSWORD,
+                        CLASS_NAME = Class.Object.CLASS_NAME,
+                       
+
+                    }
+
+                    );
+
+                    DataList.ItemsSource = RefinedList;
+                }
+            }
+            catch (Exception ex)
+            {
+                LoadingInd.IsRunning = false;
+                await DisplayAlert("Error", "Something went wrong Please try again later.\nError:" + ex.Message, "ok");
+                return;
+
+            }
         }
 
 

@@ -66,13 +66,7 @@ namespace ZeitPlan.Views.Admin
                     LastID = (await App.firebaseDatabase.Child("TBL_ROOM").OnceAsync<TBL_ROOM>()).Max(a => a.Object.ROOM_ID);
                     NewID = ++LastID;
                 }
-                List<TBL_DEPARTMENT> degs = (await App.firebaseDatabase.Child("TBL_DEPARTMENT").OnceAsync<TBL_DEPARTMENT>()).Select(x => new TBL_DEPARTMENT
-                {
-                    DEPARTMENT_ID = x.Object.DEPARTMENT_ID,
-                    DEPARTMENT_NAME = x.Object.DEPARTMENT_NAME
-
-                }).ToList();
-                int selected = degs[ddlDepartment.SelectedIndex].DEPARTMENT_ID;
+                var Department = (await App.firebaseDatabase.Child("TBL_DEPARTMENT").OnceAsync<TBL_DEPARTMENT>()).FirstOrDefault(x => x.Object.DEPARTMENT_NAME == ddlDepartment.SelectedItem.ToString());
 
 
                 TBL_ROOM r = new TBL_ROOM()
@@ -80,7 +74,7 @@ namespace ZeitPlan.Views.Admin
                     ROOM_ID = NewID,
                     ROOM_NO = txtRNO.Text,
 
-                    DEPARTMENT_FID=selected
+                    DEPARTMENT_FID= Department.Object.DEPARTMENT_ID,
                 };
 
                 await App.firebaseDatabase.Child("TBL_ROOM").PostAsync(r);

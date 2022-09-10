@@ -5,10 +5,23 @@
     <ContentPage.Content>
         <StackLayout>
             <ActivityIndicator x:Name="LoadingInd" IsRunning="False" />
-            <ListView x:Name="DataList" ItemTapped="DataList_ItemTapped">
+            <ListView x:Name="DataList"  HasUnevenRows="True" ItemTapped="DataList_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell Text="{Binding DEGREE_NAME}" Detail="{Binding DEGREE_FID}" ImageSource="icon_feed.png"/>
+                        <ViewCell>
+                            <StackLayout Padding="24" >
+
+                                <Grid ColumnDefinitions="100,*" VerticalOptions="Center" HorizontalOptions="Center"  RowDefinitions="*" Grid.ColumnSpan="2" Grid.RowSpan="3" >
+                                    <Label Grid.Row="0"   FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"  Text="DegreeID:"/>
+                                    <Label Grid.Row="0" Grid.Column="1"  BackgroundColor="LightGray"  x:Name="DegreeID"/>
+                                    <Label BackgroundColor="LightBlue"    FontAttributes="Bold" Grid.Row="1"  Grid.Column="0" Text="DegreeName:"/>
+                                    <Label Grid.Row="1"   BackgroundColor="LightGray" Grid.Column="1" Text="{Binding DEGREE_NAME}"/>
+                                    <Label Grid.Row="2"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="Department Name:"/>
+                                    <Label Grid.Row="2" Grid.Column="1"  BackgroundColor="LightGray"  Text="{Binding DEPARTMENT_NAME}"/>
+
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

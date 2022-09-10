@@ -62,20 +62,13 @@ namespace ZeitPlan.Views.Admin
                     LastID = (await App.firebaseDatabase.Child("TBL_REQUEST_PORTAL").OnceAsync<TBL_REQUEST_PORTAL>()).Max(a => a.Object.REQUEST_PORTAL_ID);
                     NewID = ++LastID;
                 }
-                List<TBL_DEPARTMENT> degs = (await App.firebaseDatabase.Child("TBL_DEPARTMENT").OnceAsync<TBL_DEPARTMENT>()).Select(x => new TBL_DEPARTMENT
-                {
-                    DEPARTMENT_ID = x.Object.DEPARTMENT_ID,
-                    DEPARTMENT_NAME = x.Object.DEPARTMENT_NAME
-
-                }).ToList();
-                int selected = degs[ddldept.SelectedIndex].DEPARTMENT_ID;
-
+                var Department = (await App.firebaseDatabase.Child("TBL_DEPARTMENT").OnceAsync<TBL_DEPARTMENT>()).FirstOrDefault(x => x.Object.DEPARTMENT_NAME == ddldept.SelectedItem.ToString());
 
                 TBL_REQUEST_PORTAL t = new TBL_REQUEST_PORTAL()
                 {
                     REQUEST_PORTAL_ID = NewID,
                     Student_FID = 100,
-                    DEPARTMENT_FID = selected,
+                    DEPARTMENT_FID = Department.Object.DEPARTMENT_ID,
                     REQUEST_MESSAGE = Subject.Text,
                     TYPE = ddltype.SelectedItem.ToString(),
                 };

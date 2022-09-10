@@ -5,10 +5,22 @@
     <ContentPage.Content>
         <StackLayout>
             <ActivityIndicator x:Name="LoadingInd" IsRunning="False" />
-            <ListView x:Name="DataList" ItemTapped="DataList_ItemTapped">
+            <ListView x:Name="DataList" HasUnevenRows="True" ItemTapped="DataList_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell Text="{Binding ROOM_NO}" Detail="{Binding DEPARTMENT_FID}" ImageSource="icon_feed.png"/>
+                        
+                        <StackLayout Padding="24" >
+
+                            <Grid ColumnDefinitions="100,*" VerticalOptions="Center" HorizontalOptions="Center"  RowDefinitions="*" Grid.ColumnSpan="2" Grid.RowSpan="3" >
+                                <Label Grid.Row="0"   FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"  Text="RoomID:"/>
+                                <Label Grid.Row="0" Grid.Column="1"  BackgroundColor="LightGray"  x:Name="RoomID"/>
+                                <Label BackgroundColor="LightBlue"    FontAttributes="Bold" Grid.Row="1"  Grid.Column="0" Text="Room Number:"/>
+                                <Label Grid.Row="1"   BackgroundColor="LightGray" Grid.Column="1" Text="{Binding  ROOM_NO }"/>
+                                <Label Grid.Row="2"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="DepartmentFID:"/>
+                                <Label Grid.Row="2" Grid.Column="1"  BackgroundColor="LightGray"  Text="{Binding  DEPARTMENT_NAME }"/>
+
+                            </Grid>
+                        </StackLayout>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

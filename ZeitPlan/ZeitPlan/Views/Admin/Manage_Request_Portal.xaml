@@ -4,16 +4,37 @@
              x:Class="ZeitPlan.Views.Admin.Manage_Request_Portal">
     <ContentPage.Content>
         <ScrollView>
-        <StackLayout>
-            <ActivityIndicator x:Name="LoadingInd" IsRunning="False" />
-            <ListView x:Name="DataList" ItemTapped="DataList_ItemTapped">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ImageCell Text="{Binding }" Detail="{Binding Message}" ImageSource="icon_feed.png"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+            <StackLayout>
+                <ActivityIndicator x:Name="LoadingInd" IsRunning="False" />
+                <ListView x:Name="DataList"  HasUnevenRows="True" ItemTapped="DataList_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="24" >
+
+                                <Grid ColumnDefinitions="150,*" VerticalOptions="Center" HorizontalOptions="Center"  RowDefinitions="*" Grid.ColumnSpan="2" Grid.RowSpan="6" >
+                                    <Label Grid.Row="0"   FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"  Text="Request ID:"/>
+                                    <Label Grid.Row="0" Grid.Column="1"  BackgroundColor="LightGray"  x:Name="RequestID"/>
+                                    <Label BackgroundColor="LightBlue"    FontAttributes="Bold" Grid.Row="1"  Grid.Column="0" Text="Department Name:"/>
+                                    <Label Grid.Row="1"   BackgroundColor="LightGray" Grid.Column="1" Text="{Binding  DEPARTMENT_NAME}"/>
+                                    <Label Grid.Row="2"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="Student Name:"/>
+                                    <Label Grid.Row="2" Grid.Column="1"  BackgroundColor="LightGray"  x:Name="StudentName"/>
+                                    <Label BackgroundColor="LightBlue"    FontAttributes="Bold" Grid.Row="3"  Grid.Column="0" Text="Type:"/>
+                                    <Label Grid.Row="3"   BackgroundColor="LightGray" Grid.Column="1" Text="{Binding Type}"/>
+                                    <Label Grid.Row="4"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="Message:"/>
+                                    <Label Grid.Row="4" Grid.Column="1"  BackgroundColor="LightGray"  Text="{Binding Message}"/>
+
+                                    <Label Grid.Row="5"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="Status:"/>
+                                    <Label Grid.Row="5" Grid.Column="1"  BackgroundColor="LightGray"  Text="{Binding Status}"/>
+
+
+
+
+                                </Grid>
+                            </StackLayout>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

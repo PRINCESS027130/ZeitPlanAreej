@@ -63,21 +63,15 @@ namespace ZeitPlan.Views.Teacher
                     LastID = (await App.firebaseDatabase.Child("TBL_STUDENT").OnceAsync<TBL_STUDENT>()).Max(a => a.Object.STUDENT_ID);
                     NewID = ++LastID;
                 }
-                List<TBL_CLASS> cl = (await App.firebaseDatabase.Child("TBL_CLASS").OnceAsync<TBL_CLASS>()).Select(x => new TBL_CLASS
-                {
-                    //CLASS_ID = x.Object.CLASS_ID,
-                    CLASS_NAME = x.Object.CLASS_NAME
+                var Class = (await App.firebaseDatabase.Child("TBL_CLASS").OnceAsync<TBL_CLASS>()).FirstOrDefault(x => x.Object.CLASS_NAME == ddlClass.SelectedItem.ToString());
 
-                }).ToList();
-                int selected = cl[ddlClass.SelectedIndex].CLASS_ID;
-               
 
                 TBL_STUDENT s = new TBL_STUDENT()
                 {
                     STUDENT_ID = NewID,
                     STUDENT_NAME = txtStName.Text,
                     STUDENT_EMAIL = txtStEmail.Text,                  
-                    CLASS_FID = selected,                   
+                    CLASS_FID = Class.Object.CLASS_ID,                   
                 };
 
                 await App.firebaseDatabase.Child("TBL_STUDENT").PostAsync(s);

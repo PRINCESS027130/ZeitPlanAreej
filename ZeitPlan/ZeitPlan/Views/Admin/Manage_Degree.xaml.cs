@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZeitPlan.View_Model;
 
 namespace ZeitPlan.Views.Admin
 {
@@ -38,15 +39,39 @@ namespace ZeitPlan.Views.Admin
 
         async void LoadData()
         {
-            DataList.ItemsSource = (await App.firebaseDatabase.Child("TBL_DEGREE").OnceAsync<TBL_DEGREE>()).Select(x => new TBL_DEGREE
+            try
             {
-                DEGREE_ID = x.Object.DEGREE_ID,
-                DEGREE_NAME = x.Object.DEGREE_NAME,
-                DEPARTMENT_FID = x.Object.DEPARTMENT_FID,
 
 
-            }).ToList();
+                var RawData = (await App.firebaseDatabase.Child("TBL_DEGREE").OnceAsync<TBL_DEGREE>()).ToList();
+                var RefinedList = new List<View_Degree>();
+                foreach (var item in RawData)
+                {
+                    var Department = (await App.firebaseDatabase.Child("TBL_DEPARTMENT").OnceAsync<TBL_DEPARTMENT>()).FirstOrDefault(x => x.Object.DEPARTMENT_ID == item.Object.DEPARTMENT_FID);
+
+
+                    RefinedList.Add(new View_Degree
+                    {
+                        DEGREE_ID = item.Object.DEGREE_ID,
+                        DEPARTMENT_NAME = Department.Object.DEPARTMENT_NAME,
+                        DEGREE_NAME = item.Object.DEGREE_NAME,
+                       
+                    }
+
+                    );
+
+                    DataList.ItemsSource = RefinedList;
+                }
+            }
+            catch (Exception ex)
+            {
+                LoadingInd.IsRunning = false;
+                await DisplayAlert("Error", "Something went wrong Please try again later.\nError:" + ex.Message, "ok");
+                return;
+
+            }
         }
+    
 
         private async void DataList_ItemTapped(object sender, ItemTappedEventArgs e)
         {

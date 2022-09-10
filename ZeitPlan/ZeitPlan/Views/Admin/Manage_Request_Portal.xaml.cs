@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZeitPlan.View_Model;
 
 namespace ZeitPlan.Views.Admin
 {
@@ -37,17 +38,39 @@ namespace ZeitPlan.Views.Admin
         }
         async void LoadData()
         {
-            DataList.ItemsSource = (await App.firebaseDatabase.Child("TBL_REQUEST_PORTAL").OnceAsync<TBL_REQUEST_PORTAL>()).Select(x => new TBL_REQUEST_PORTAL
+            try
             {
-               REQUEST_PORTAL_ID = x.Object.REQUEST_PORTAL_ID,
-                Student_FID=x.Object.Student_FID,
-                STATUS=x.Object.STATUS,
-                TYPE=x.Object.TYPE.ToString(),
-                REQUEST_MESSAGE=x.Object.REQUEST_MESSAGE,
-                DEPARTMENT_FID = x.Object.DEPARTMENT_FID,
 
 
-            }).ToList();
+                var RawData = (await App.firebaseDatabase.Child("TBL_REQUEST_PORTAL").OnceAsync<TBL_REQUEST_PORTAL>()).ToList();
+                var RefinedList = new List<View_RequestPortal>();
+                foreach (var item in RawData)
+                {
+                    var Department = (await App.firebaseDatabase.Child("TBL_DEPARTMENT").OnceAsync<TBL_DEPARTMENT>()).FirstOrDefault(x => x.Object.DEPARTMENT_ID == item.Object.DEPARTMENT_FID);
+
+
+                    RefinedList.Add(new View_RequestPortal
+                    {
+                        REQUEST_PORTAL_ID = item.Object.REQUEST_PORTAL_ID,
+                        REQUEST_MESSAGE = item.Object.REQUEST_MESSAGE,
+                        STATUS= item.Object.STATUS,
+                        TYPE= item.Object.TYPE,
+                        DEPARTMENT_NAME= Department.Object.DEPARTMENT_NAME,
+
+                    }
+
+                    );
+
+                    DataList.ItemsSource = RefinedList;
+                }
+            }
+            catch (Exception ex)
+            {
+                LoadingInd.IsRunning = false;
+                await DisplayAlert("Error", "Something went wrong Please try again later.\nError:" + ex.Message, "ok");
+                return;
+
+            }
         }
 
         private async void DataList_ItemTapped(object sender, ItemTappedEventArgs e)

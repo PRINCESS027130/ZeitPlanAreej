@@ -6,6 +6,27 @@
         <StackLayout>
             <ActivityIndicator x:Name="LoadingInd" IsRunning="False" />
             <ListView x:Name="DataList" ItemTapped="DataList_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="24" >
+
+                            <Grid ColumnDefinitions="100,*" VerticalOptions="Center" HorizontalOptions="Center"  RowDefinitions="*" Grid.ColumnSpan="2" Grid.RowSpan="3" >
+                                <Label Grid.Row="0"   FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"  Text="Student_ID:"/>
+                                <Label Grid.Row="0" Grid.Column="1"  BackgroundColor="LightGray"  x:Name="StudentID"/>
+                                <Label BackgroundColor="LightBlue"    FontAttributes="Bold" Grid.Row="1"  Grid.Column="0" Text="Student Name:"/>
+                                <Label Grid.Row="1"   BackgroundColor="LightGray" Grid.Column="1" Text="{Binding  STUDENT_NAME}"/>
+
+                                <Label Grid.Row="2"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="Student Password:"/>
+                                <Label Grid.Row="2" Grid.Column="1"  BackgroundColor="LightGray"  Text="{Binding   STUDENT_PASSWORD}"/>
+                                <Label Grid.Row="3"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="Student Email:"/>
+                                <Label Grid.Row="3" Grid.Column="1"  BackgroundColor="LightGray"  Text="{Binding  STUDENT_EMAIL}"/>
+                                <Label Grid.Row="4"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="Class Name:"/>
+                                <Label Grid.Row="4" Grid.Column="1"  BackgroundColor="LightGray"  Text="{Binding   CLASS_NAME}"/>
+
+                            </Grid>
+                        </StackLayout>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
             </ListView>
 
