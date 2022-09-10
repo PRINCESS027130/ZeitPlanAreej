@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ZeitPlan.Views.Admin.Manage_Class" Title="Manage Class">
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator x:Name="LoadingInd" IsRunning="False" />
+            <ListView x:Name="DataList" HasUnevenRows="True" ItemTapped="DataList_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="24" >
+
+                                <Grid ColumnDefinitions="100,*" VerticalOptions="Center" HorizontalOptions="Center"  RowDefinitions="*" Grid.ColumnSpan="2" Grid.RowSpan="3" >
+                                    <Label Grid.Row="0"   FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"  Text="ClassID:"/>
+                                    <Label Grid.Row="0" Grid.Column="1"  BackgroundColor="LightGray"  x:Name="ClassID"/>
+                                    <Label BackgroundColor="LightBlue"    FontAttributes="Bold" Grid.Row="1"  Grid.Column="0" Text="Session:"/>
+                                    <Label Grid.Row="1"   BackgroundColor="LightGray" Grid.Column="1" Text="{Binding SESSION}"/>
+                                    <Label Grid.Row="2"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="Section:"/>
+                                    <Label Grid.Row="2" Grid.Column="1"  BackgroundColor="LightGray"  Text="{Binding SECTION}"/>
+                                    <Label Grid.Row="3"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="Shift:"/>
+                                    <Label Grid.Row="3" Grid.Column="1"  BackgroundColor="LightGray"  Text="{Binding SHIFT}"/>
+                                    <Label Grid.Row="4"    FontAttributes="Bold" Grid.Column="0" BackgroundColor="LightBlue"   Text="Degree Name:"/>
+                                    <Label Grid.Row="4" Grid.Column="1"  BackgroundColor="LightGray"  Text="{Binding  DEGREE_NAME}"/>
+
+
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

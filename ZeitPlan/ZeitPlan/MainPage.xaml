@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ZeitPlan.MainPage" BackgroundColor="White" >
+
+        <StackLayout Padding="24" VerticalOptions="CenterAndExpand">
+            <Image Source="ic_zp_gen_White"/>
+           
+        <Label FontSize="48"  HorizontalOptions="CenterAndExpand" TextColor="#324359" Text="ZeitPlan"/>
+        <Label FontSize="Medium" HorizontalOptions="CenterAndExpand" TextColor="#324359" Text="Fly over Time." Margin="0,0,0,200"/>
+            <Button Text="Get Started" BorderWidth="4" BorderColor="white" CornerRadius="12" BackgroundColor="#bd6513" TextColor="white"  x:Name="btnGetStarted" Clicked="BtnGetStarted_Clicked"/>
+
+            <StackLayout  Orientation="Horizontal">
+            <Label  TextColor="#324359" Text="Admin">
+                    <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            <Label TextColor="#324359" Text=" | "/>
+            <Label TextColor="#324359" Text="Teacher">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="Teacher" Tapped="Teacher_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            <Label TextColor="#324359" Text=" | "/>
+            <Label  TextColor="#324359" Text="Student">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="Student"  Tapped="Student_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            <Label TextColor="#324359" Text=" | "/>
+            <Label  TextColor="#324359" Text="Reset Defualt">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="Reset_Default" Tapped="Reset_Default_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </StackLayout>
+        </StackLayout >
+</ContentPage>

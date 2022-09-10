@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:Xamarin.Forms.BackgroundVideoView;assembly=Xamarin.Forms.BackgroundVideoView"
+             x:Class="ZeitPlan.LoginSystem.Login"
+             Title="Login" 
+             >
+    <ContentPage.Content>
+        <controls:BackgroundVideoView Source="back_video.mp4" Loop="True"
+                        HorizontalOptions="Fill" VerticalOptions="Fill" >
+            <controls:BackgroundVideoView.ViewContent>
+                <!--YOUR CONTENT-->
+
+                <Grid Padding="24" RowSpacing="20" VerticalOptions="CenterAndExpand" RowDefinitions="Auto,Auto,Auto"   >
+                    <Entry x:Name="txtEmail" Grid.Row="1" BackgroundColor="Transparent" Placeholder="Email...." Keyboard="Email"/>
+                    <Entry x:Name="txtPassword" Grid.Row="2" BackgroundColor="Transparent" Placeholder="Password...." IsPassword="True"/>
+
+                    <Button Grid.Row="3" Text="Login" Clicked="Button_Clicked"/>
+                    <Label Grid.Row="4" Text="Registered Now">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <ActivityIndicator x:Name="LoadingInd" IsRunning="False" />
+                </Grid>
+            </controls:BackgroundVideoView.ViewContent>
+        </controls:BackgroundVideoView>
+
+
+    </ContentPage.Content>
+</ContentPage>
