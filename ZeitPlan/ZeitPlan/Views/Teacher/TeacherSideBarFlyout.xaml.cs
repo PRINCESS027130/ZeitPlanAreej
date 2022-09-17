@@ -36,9 +36,9 @@ namespace ZeitPlan.Views.Teacher
                     new TeacherSideBarFlyoutMenuItem { Id = 0, Icon="home_icon.png"  , Title = "Home" ,TargetType=typeof(TeacherHome) },
                     new TeacherSideBarFlyoutMenuItem { Id = 1, Icon="table_icon.png", Title = "View table",TargetType=typeof(ViewTable) },
                     new TeacherSideBarFlyoutMenuItem { Id = 2, Icon="Progress_icon.png", Title = "Student Progress" },
-                    new TeacherSideBarFlyoutMenuItem { Id = 3, Icon="icon_feed.png", Title = "Teacher Diary" },
-                    new TeacherSideBarFlyoutMenuItem { Id = 4, Icon="icon_feed.png", Title = "Teacher List", TargetType=typeof(Teacher_List) },
-                    new TeacherSideBarFlyoutMenuItem { Id = 5, Icon="icon_feed.png", Title = "Request Portol", TargetType=typeof(Request_Portol) },
+                    new TeacherSideBarFlyoutMenuItem { Id = 3, Icon="Diary_icon", Title = "Teacher Diary" },
+                    new TeacherSideBarFlyoutMenuItem { Id = 4, Icon="teachere_list", Title = "Teacher List", TargetType=typeof(Teacher_List) },
+                    new TeacherSideBarFlyoutMenuItem { Id = 5, Icon="request", Title = "Request Portol", TargetType=typeof(Request_Portol) },
                     new TeacherSideBarFlyoutMenuItem { Id = 6, Icon="profile_icon", Title = "Add Student", TargetType=typeof(Add_Student) },
                     new TeacherSideBarFlyoutMenuItem { Id = 7, Icon="manage_icon", Title = "Manage Student", TargetType=typeof(Manage_Student) },
 
